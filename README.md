@@ -1,8 +1,8 @@
 # Components
 
-- [ ] Text (padronizar colocações de uma fonte, tamanho, cores e utilizações)
+- [ ] Text
 - [ ] Heading
-- [ ] Box (Componente que é facilmente reutizavel por varios lugares da aplicação)
+- [ ] Box
 - [ ] Button
 - [ ] TextArea
 - [ ] TextInput
