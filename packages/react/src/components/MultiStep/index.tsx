@@ -4,6 +4,7 @@ export interface MultiStepProps {
   size: number
   currentStep?: number
 }
+
 export function MultiStep({ size, currentStep = 1 }: MultiStepProps) {
   return (
     <MultiStepContainer>
