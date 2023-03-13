@@ -1,0 +1,2 @@
+import{e,B as a,a as t}from"./index.49ec1f9c.js";import{j as r}from"./jsx-runtime.5874e388.js";import"./index.9ee7edcc.js";import"./iframe.eb84d9c1.js";import"./index.3a52f57c.js";const m={title:"Form/Tooltip",component:e,decorators:[o=>r(a,{css:{padding:"4rem"},children:o()})]},p={args:{date:String(new Date),isAvailable:!0,children:r(t,{children:"12"})}},l={args:{date:String(new Date),children:r(t,{})}},g=["Primary","Secondary"];export{p as Primary,l as Secondary,g as __namedExportsOrder,m as default};
+//# sourceMappingURL=Tooltip.stories.4573bb27.js.map

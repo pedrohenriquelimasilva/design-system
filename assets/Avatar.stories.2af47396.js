@@ -1,0 +1,2 @@
+import{A as t}from"./index.49ec1f9c.js";import"./index.9ee7edcc.js";import"./iframe.eb84d9c1.js";import"./index.3a52f57c.js";import"./jsx-runtime.5874e388.js";const e={title:"Data display/Avatar",component:t,args:{src:"https://github.com/pedrohenriquelimasilva.png",alt:"Pedro Silva"},argTypes:{srcSet:{control:{type:"text"}}}},p={},c={args:{src:void 0}},l=["Primary","WithFallback"];export{p as Primary,c as WithFallback,l as __namedExportsOrder,e as default};
+//# sourceMappingURL=Avatar.stories.2af47396.js.map
