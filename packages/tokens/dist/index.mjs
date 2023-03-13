@@ -13,7 +13,8 @@ var colors = {
   green700: "#015f43",
   green900: "#00291d",
   white: "#FFF",
-  black: "#000"
+  black: "#000",
+  test: "#FFF"
 };
 
 // src/font-sizes.ts

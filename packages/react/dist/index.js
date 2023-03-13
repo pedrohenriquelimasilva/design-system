@@ -63,7 +63,9 @@ __export(src_exports, {
   MultiStep: () => MultiStep,
   Text: () => Text,
   TextArea: () => TextArea,
-  TextInput: () => TextInput
+  TextInput: () => TextInput,
+  Toast: () => Toast2,
+  Tooltip: () => Tooltip2
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -82,7 +84,8 @@ var colors = {
   green700: "#015f43",
   green900: "#00291d",
   white: "#FFF",
-  black: "#000"
+  black: "#000",
+  test: "#FFF"
 };
 var fontSizes = {
   xxs: "0.625rem",
@@ -532,6 +535,127 @@ function MultiStep({ size, currentStep = 1 }) {
   ] });
 }
 MultiStep.displayName = "MultiStep";
+
+// src/components/Toast/styles.ts
+var Toast = __toESM(require("@radix-ui/react-toast"));
+var ToastContainer = styled(Toast.Root, {
+  position: "absolute",
+  bottom: "1rem",
+  right: "1rem",
+  background: "$gray800",
+  padding: "$3 $5",
+  width: "100%",
+  maxWidth: "22.5rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "$2",
+  borderRadius: "$md",
+  border: "1px solid $gray600",
+  fontFamily: "Roboto"
+});
+var ToastTitle = styled(Toast.Title, {
+  color: "$white",
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  justifyContent: "space-between",
+  fontSize: "$xl"
+});
+var ToastAction = styled(Toast.Action, {
+  background: "transparent",
+  border: "0",
+  cursor: "pointer",
+  svg: {
+    color: "$gray200",
+    cursor: "pointer",
+    transition: "color 0.2s",
+    "$:hover": {
+      color: "$gray400"
+    }
+  }
+});
+var ToastDescription = styled(Toast.Description, {
+  fontSize: "$sm",
+  lineHeight: "$base",
+  color: "$gray200"
+});
+
+// src/components/Toast/index.tsx
+var import_pt_BR = __toESM(require("date-fns/locale/pt-BR"));
+var import_date_fns = require("date-fns");
+var import_phosphor_react3 = require("phosphor-react");
+var ToastUI = __toESM(require("@radix-ui/react-toast"));
+var import_react2 = require("react");
+var import_jsx_runtime5 = require("react/jsx-runtime");
+function Toast2({ isSheduled = true, dateSheduled }) {
+  const [isOpenToast, setIsOpenToast] = (0, import_react2.useState)(false);
+  const timerRef = (0, import_react2.useRef)(0);
+  (0, import_react2.useEffect)(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+  const date = (0, import_date_fns.format)(
+    new Date(dateSheduled),
+    "EEEE'-feira' ',' dd 'de' MMMM '\xE1s' HH'h'",
+    {
+      locale: import_pt_BR.default
+    }
+  );
+  function handleActiveToast() {
+    setIsOpenToast(false);
+    window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      setIsOpenToast(true);
+    }, 100);
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastUI.Provider, { swipeDirection: "right", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Button, { onClick: handleActiveToast, children: "Criar agenda" }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastContainer, { open: isOpenToast, onOpenChange: setIsOpenToast, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastTitle, { children: [
+        isSheduled ? "Agendamento realizado" : "Agendamento n\xE3o realizado",
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastAction, { altText: "Close", asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_phosphor_react3.X, { weight: "bold", size: 14 }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastDescription, { children: date })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastUI.Viewport, {})
+  ] });
+}
+
+// src/components/Tooltip/index.tsx
+var TooltipUI = __toESM(require("@radix-ui/react-tooltip"));
+var import_date_fns2 = require("date-fns");
+
+// src/components/Tooltip/style.ts
+var Tooltip = __toESM(require("@radix-ui/react-tooltip"));
+var TooltipRoot = styled(Tooltip.Root, {});
+var TooltipContent = styled(Tooltip.Content, {
+  background: "$gray900",
+  color: "$gray100",
+  padding: "$3 $4",
+  fontSize: "$md",
+  lineHeight: "$short",
+  borderRadius: "5px"
+});
+var TooltipTrigger = styled(Tooltip.Trigger, {
+  background: "transparent",
+  border: 0,
+  cursor: "pointer"
+});
+
+// src/components/Tooltip/index.tsx
+var import_pt_BR2 = __toESM(require("date-fns/locale/pt-BR"));
+var import_jsx_runtime6 = require("react/jsx-runtime");
+function Tooltip2({ date, isAvailable = false, children }) {
+  const dateAvailable = (0, import_date_fns2.format)(new Date(date), "dd 'de' MMMM ", {
+    locale: import_pt_BR2.default
+  });
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipUI.Provider, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(TooltipUI.Root, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipTrigger, { children }),
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipUI.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(TooltipContent, { "data-side": "bottom", align: "center", children: [
+      `${dateAvailable} - ${isAvailable ? "Dispon\xEDvel" : "Indispon\xEDvel"}`,
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipUI.Arrow, { width: 16, height: 8 })
+    ] }) })
+  ] }) });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Avatar,
@@ -542,5 +666,7 @@ MultiStep.displayName = "MultiStep";
   MultiStep,
   Text,
   TextArea,
-  TextInput
+  TextInput,
+  Toast,
+  Tooltip
 });

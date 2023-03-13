@@ -1,7 +1,7 @@
 import * as _stitches_react_types_styled_component from '@stitches/react/types/styled-component';
 import * as _stitches_react_types_css_util from '@stitches/react/types/css-util';
 import * as react from 'react';
-import { ComponentProps, ElementType } from 'react';
+import { ComponentProps, ElementType, ReactNode } from 'react';
 import * as Avatar$1 from '@radix-ui/react-avatar';
 import * as Checkbox$1 from '@radix-ui/react-checkbox';
 
@@ -21,6 +21,7 @@ declare const Box: _stitches_react_types_styled_component.StyledComponent<"div",
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -229,6 +230,7 @@ declare const Text: _stitches_react_types_styled_component.StyledComponent<"p", 
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -437,6 +439,7 @@ declare const Heading: _stitches_react_types_styled_component.StyledComponent<"h
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -643,6 +646,7 @@ declare const AvatarImage: _stitches_react_types_styled_component.StyledComponen
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -856,6 +860,7 @@ declare const Button: _stitches_react_types_styled_component.StyledComponent<"bu
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -1062,6 +1067,7 @@ declare const Input: _stitches_react_types_styled_component.StyledComponent<"inp
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -1273,6 +1279,7 @@ declare const TextArea: _stitches_react_types_styled_component.StyledComponent<"
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -1478,6 +1485,7 @@ declare const CheckboxContainer: _stitches_react_types_styled_component.StyledCo
         readonly green900: "#00291d";
         readonly white: "#FFF";
         readonly black: "#000";
+        readonly test: "#FFF";
     };
     radii: {
         readonly px: "1px";
@@ -1681,4 +1689,17 @@ declare namespace MultiStep {
     var displayName: string;
 }
 
-export { Avatar, AvatarProps, Box, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Heading, HeadingProps, MultiStep, MultiStepProps, Text, TextArea, TextAreaProps, TextInput, TextInputProps, TextProps };
+interface ToastProps {
+    isSheduled?: boolean;
+    dateSheduled: string;
+}
+declare function Toast({ isSheduled, dateSheduled }: ToastProps): JSX.Element;
+
+interface TooltipProps {
+    date: string;
+    isAvailable?: boolean;
+    children: ReactNode;
+}
+declare function Tooltip({ date, isAvailable, children }: TooltipProps): JSX.Element;
+
+export { Avatar, AvatarProps, Box, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Heading, HeadingProps, MultiStep, MultiStepProps, Text, TextArea, TextAreaProps, TextInput, TextInputProps, TextProps, Toast, ToastProps, Tooltip, TooltipProps };

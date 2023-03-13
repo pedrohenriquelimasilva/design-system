@@ -45,7 +45,8 @@ var colors = {
   green700: "#015f43",
   green900: "#00291d",
   white: "#FFF",
-  black: "#000"
+  black: "#000",
+  test: "#FFF"
 };
 var fontSizes = {
   xxs: "0.625rem",
@@ -495,6 +496,127 @@ function MultiStep({ size, currentStep = 1 }) {
   ] });
 }
 MultiStep.displayName = "MultiStep";
+
+// src/components/Toast/styles.ts
+import * as Toast from "@radix-ui/react-toast";
+var ToastContainer = styled(Toast.Root, {
+  position: "absolute",
+  bottom: "1rem",
+  right: "1rem",
+  background: "$gray800",
+  padding: "$3 $5",
+  width: "100%",
+  maxWidth: "22.5rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "$2",
+  borderRadius: "$md",
+  border: "1px solid $gray600",
+  fontFamily: "Roboto"
+});
+var ToastTitle = styled(Toast.Title, {
+  color: "$white",
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  justifyContent: "space-between",
+  fontSize: "$xl"
+});
+var ToastAction = styled(Toast.Action, {
+  background: "transparent",
+  border: "0",
+  cursor: "pointer",
+  svg: {
+    color: "$gray200",
+    cursor: "pointer",
+    transition: "color 0.2s",
+    "$:hover": {
+      color: "$gray400"
+    }
+  }
+});
+var ToastDescription = styled(Toast.Description, {
+  fontSize: "$sm",
+  lineHeight: "$base",
+  color: "$gray200"
+});
+
+// src/components/Toast/index.tsx
+import ptBr from "date-fns/locale/pt-BR";
+import { format } from "date-fns";
+import { X } from "phosphor-react";
+import * as ToastUI from "@radix-ui/react-toast";
+import { useEffect, useRef, useState } from "react";
+import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+function Toast2({ isSheduled = true, dateSheduled }) {
+  const [isOpenToast, setIsOpenToast] = useState(false);
+  const timerRef = useRef(0);
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+  const date = format(
+    new Date(dateSheduled),
+    "EEEE'-feira' ',' dd 'de' MMMM '\xE1s' HH'h'",
+    {
+      locale: ptBr
+    }
+  );
+  function handleActiveToast() {
+    setIsOpenToast(false);
+    window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      setIsOpenToast(true);
+    }, 100);
+  }
+  return /* @__PURE__ */ jsxs4(ToastUI.Provider, { swipeDirection: "right", children: [
+    /* @__PURE__ */ jsx5(Button, { onClick: handleActiveToast, children: "Criar agenda" }),
+    /* @__PURE__ */ jsxs4(ToastContainer, { open: isOpenToast, onOpenChange: setIsOpenToast, children: [
+      /* @__PURE__ */ jsxs4(ToastTitle, { children: [
+        isSheduled ? "Agendamento realizado" : "Agendamento n\xE3o realizado",
+        /* @__PURE__ */ jsx5(ToastAction, { altText: "Close", asChild: true, children: /* @__PURE__ */ jsx5(X, { weight: "bold", size: 14 }) })
+      ] }),
+      /* @__PURE__ */ jsx5(ToastDescription, { children: date })
+    ] }),
+    /* @__PURE__ */ jsx5(ToastUI.Viewport, {})
+  ] });
+}
+
+// src/components/Tooltip/index.tsx
+import * as TooltipUI from "@radix-ui/react-tooltip";
+import { format as format2 } from "date-fns";
+
+// src/components/Tooltip/style.ts
+import * as Tooltip from "@radix-ui/react-tooltip";
+var TooltipRoot = styled(Tooltip.Root, {});
+var TooltipContent = styled(Tooltip.Content, {
+  background: "$gray900",
+  color: "$gray100",
+  padding: "$3 $4",
+  fontSize: "$md",
+  lineHeight: "$short",
+  borderRadius: "5px"
+});
+var TooltipTrigger = styled(Tooltip.Trigger, {
+  background: "transparent",
+  border: 0,
+  cursor: "pointer"
+});
+
+// src/components/Tooltip/index.tsx
+import ptBr2 from "date-fns/locale/pt-BR";
+import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function Tooltip2({ date, isAvailable = false, children }) {
+  const dateAvailable = format2(new Date(date), "dd 'de' MMMM ", {
+    locale: ptBr2
+  });
+  return /* @__PURE__ */ jsx6(TooltipUI.Provider, { children: /* @__PURE__ */ jsxs5(TooltipUI.Root, { children: [
+    /* @__PURE__ */ jsx6(TooltipTrigger, { children }),
+    /* @__PURE__ */ jsx6(TooltipUI.Portal, { children: /* @__PURE__ */ jsxs5(TooltipContent, { "data-side": "bottom", align: "center", children: [
+      `${dateAvailable} - ${isAvailable ? "Dispon\xEDvel" : "Indispon\xEDvel"}`,
+      /* @__PURE__ */ jsx6(TooltipUI.Arrow, { width: 16, height: 8 })
+    ] }) })
+  ] }) });
+}
 export {
   Avatar2 as Avatar,
   Box,
@@ -504,5 +626,7 @@ export {
   MultiStep,
   Text,
   TextArea,
-  TextInput
+  TextInput,
+  Toast2 as Toast,
+  Tooltip2 as Tooltip
 };
